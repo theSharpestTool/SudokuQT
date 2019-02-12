@@ -3,7 +3,7 @@
 
 extern Widget* widget;
 
-Client::Client(QString strHost, int nPort, QWidget *pwgt) :QWidget(pwgt), host(strHost), port(nPort)
+Client::Client(QString strHost, quint16 nPort, QWidget *pwgt) :QWidget(pwgt), host(strHost), port(nPort)
 {
     nextBlockSize = 0;
     socket = new QTcpSocket(this);
@@ -59,7 +59,7 @@ void Client::sendToServer(QString request)
     out << quint16(0) << request;
 
     out.device()->seek(0);
-    out << quint16(arrBlock.size() - sizeof(quint16));
+    out << quint16(static_cast<unsigned int>(arrBlock.size()) - sizeof(quint16));
 
     socket->write(arrBlock);
 }

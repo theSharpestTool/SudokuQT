@@ -9,14 +9,14 @@ class Client : public QWidget
 {
     Q_OBJECT
 public:
-    Client(QString strHost, int nPort, QWidget* pwgt = 0);
+    Client(QString strHost, quint16 nPort, QWidget* pwgt = nullptr);
     void sendToServer(QString request);
 
 private:
     QTcpSocket* socket;
     quint16 nextBlockSize;
-    QString& host;
-    int port;
+    QString host;
+    quint16 port;
 
 private slots:
     void slotReadyRead();

@@ -15,7 +15,7 @@ class Widget : public QGraphicsView
 {
     Q_OBJECT
 public:
-    Widget(QWidget *parent = 0);
+    Widget(QWidget *parent = nullptr);
     void showVariants(QPointF p);
     void showMiddleV(QPointF p);
     void showSideV(QPointF p);
@@ -54,6 +54,7 @@ private:
     QVector<QPointF> curPositions;
     QVector<QPointF> finPositions;
     int counter;
+    int cellSize;
 
 public slots:
     void recievePuzzle(int** numbrs);

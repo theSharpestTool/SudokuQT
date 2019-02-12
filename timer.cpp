@@ -12,7 +12,7 @@ void Timer::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWi
 {
     painter->setPen(QPen(Qt::darkRed, 3));
     painter->drawRect(boundingRect());
-    painter->setFont(QFont("Times", size/1.7, QFont::Normal));
+    painter->setFont(QFont("Times", static_cast<int>(size/1.7), QFont::Normal));
     QString time;
     time += QString::number(seconds/360000);
     time += QString::number((seconds/36000)%10);

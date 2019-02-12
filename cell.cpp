@@ -4,7 +4,7 @@
 
 extern Widget* widget;
 
-Cell::Cell(int s) : QGraphicsItem(), value(0), size(s), editable(true), red(false)
+Cell::Cell(int s) : QGraphicsItem(), editable(true), red(false), size(s), value(0)
 {}
 
 QRectF Cell::boundingRect() const
@@ -24,7 +24,7 @@ void Cell::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWid
     {
         if(editable)
             painter->setPen(QPen(Qt::darkRed, 1));
-        painter->setFont(QFont("Times", size/2.5, QFont::Normal));
+        painter->setFont(QFont("Times", static_cast<int>(size/2.5), QFont::Normal));
         painter->drawText(boundingRect(), Qt::AlignCenter, QString::number(value));
     }
 

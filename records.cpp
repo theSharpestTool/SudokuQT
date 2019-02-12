@@ -13,7 +13,7 @@ void Records::build()
 {
     widget->sendToServer(QString::number(difficulty));
 
-    bannerDifficulty = new Button(width(), height()/9);
+    bannerDifficulty = new Button(static_cast<int>(width()), static_cast<int>(height()/9));
     if(difficulty == 0)
         bannerDifficulty->setText(" EASY ");
     else if(difficulty == 1)
@@ -23,13 +23,13 @@ void Records::build()
     bannerDifficulty->setPos(0, 0);
     addItem(bannerDifficulty);
 
-    buttonBack = new Button(4*width()/6, height()/9);
+    buttonBack = new Button(static_cast<int>(4*width()/6), static_cast<int>(height()/9));
     buttonBack->setText("BACK");
     buttonBack->setPos(width()/6, 8*height()/9);
     addItem(buttonBack);
 
-    toggleLeft = new Button(width()/6, height()/9);
-    toggleRight = new Button(width()/6, height()/9);
+    toggleLeft = new Button(static_cast<int>(width()/6), static_cast<int>(height()/9));
+    toggleRight = new Button(static_cast<int>(width()/6), static_cast<int>(height()/9));
     toggleRight->setLeft(false);
     toggleLeft->setPos(0, 8*height()/9);
     toggleRight->setPos(5*width()/6, 8*height()/9);
@@ -38,7 +38,7 @@ void Records::build()
 
     if(error)
     {
-        bannerError = new Button(width(), height()/9);
+        bannerError = new Button(static_cast<int>(width()), static_cast<int>(height()/9));
         bannerError->setText("CONNECTION ERROR");
         bannerError->setPos(0, height()/2 - height()/18);
         addItem(bannerError);
@@ -47,8 +47,8 @@ void Records::build()
     {
         textEdit = new QTextEdit;
         textEdit->setReadOnly(true);
-        textEdit->setFixedSize(width(), 7*height()/9);
-        textEdit->setFont(QFont("Times", height()/25, QFont::Normal));
+        textEdit->setFixedSize(static_cast<int>(width()), static_cast<int>(7*height()/9));
+        textEdit->setFont(QFont("Times", static_cast<int>(height()/25), QFont::Normal));
         textEdit->append(records);
         QGraphicsProxyWidget* proxyWidget = addWidget(textEdit);
         proxyWidget->setPos(0, height()/9);

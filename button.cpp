@@ -3,7 +3,7 @@
 
 extern Widget* widget;
 
-Button::Button(int w, int h) : QGraphicsItem(), width(w), height(h), text(""), left(true)
+Button::Button(int w, int h) : QGraphicsItem(), width(w), height(h), left(true), text("")
 {}
 
 QRectF Button::boundingRect() const
@@ -40,11 +40,11 @@ void Button::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QW
         if(text == " EASY " || text == " MEDIUM " || text == " HARD " || text == "RECONNECT")
             painter->setPen(QPen(Qt::darkRed, 7));
         painter->drawRect(boundingRect());
-        painter->setFont(QFont("Times", height/2.5, QFont::Normal));
+        painter->setFont(QFont("Times", static_cast<int>(height/2.5), QFont::Normal));
         if(text == "RECORDS" || text == " EASY " || text == " MEDIUM " || text == " HARD ")
-            painter->setFont(QFont("Times", height/1.9, QFont::Normal));
+            painter->setFont(QFont("Times", static_cast<int>(height/1.9), QFont::Normal));
         if(text == "CONNECTION ERROR")
-            painter->setFont(QFont("Times", height/3.5, QFont::Normal));
+            painter->setFont(QFont("Times", static_cast<int>(height/3.5), QFont::Normal));
         painter->drawText(boundingRect(), Qt::AlignCenter, text);
     }
     if(text == "EASY" || text == "MEDIUM" || text == "HARD")

@@ -32,26 +32,27 @@ Widget::Widget(QWidget *parent)
             scene->addItem(square);
         }
 
+    cellSize = static_cast<int>(scene->width()/9);
     for(int i = 0; i < 9; i++)
         for(int j = 0; j < 9; j++)
         {
-            cell << new Cell(scene->width()/9);
-            cell[(i*9)+j]->setPos(j*scene->width()/9, scene->height()/2-((scene->width()/3)*1.5)+i*scene->width()/9);
+            cell << new Cell(cellSize);
+            cell[(i*9)+j]->setPos(j*cellSize, scene->height()/2-((scene->width()/3)*1.5)+i*cellSize);
             cell[(i*9)+j]->setEditable(false);
             scene->addItem(cell[(i*9)+j]);
         }
 
-    buttonStart = new Button(scene->width(), scene->height()/9);
+    buttonStart = new Button(static_cast<int>(scene->width()), static_cast<int>(scene->height()/9));
     buttonStart->setText("START");
     buttonStart->setPos(0, 8*scene->height()/9);
     scene->addItem(buttonStart);
 
-    buttonRecords = new Button(4*scene->width()/9, scene->width()/9+2);
+    buttonRecords = new Button(4*cellSize, cellSize+2);
     buttonRecords->setText("RECORDS");
-    buttonRecords->setPos(5*scene->width()/9, 0);
+    buttonRecords->setPos(5*cellSize, 0);
     scene->addItem(buttonRecords);
 
-    timer = new Timer(scene->width()/9);
+    timer = new Timer(cellSize);
     timer->setPos(0, 0);
     scene->addItem(timer);
 
@@ -64,13 +65,13 @@ Widget::Widget(QWidget *parent)
 
 void Widget::showVariants(QPointF p)
 {
-    if(p.x() == 0 || p.x() == 8*scene->width()/9)
+    if(static_cast<int>(p.x()) == 0 || static_cast<int>(p.x()) == static_cast<int>(8*scene->width()/9))
         showSideV(p);
     else
         showMiddleV(p);
     int x, y;
-    x = p.x()/(scene->width()/9);
-    y = p.y()/(scene->width()/9)-3;
+    x = static_cast<int>(p.x()/(cellSize));
+    y = static_cast<int>(p.y()/(cellSize))-2;
     chosenCell = new QPoint(x,y);
 }
 
@@ -79,7 +80,7 @@ void Widget::showMiddleV(QPointF p)
     for(int i = 0; i < 9; i++)
     {
         double x, y;
-        circle << new Circle(scene->width()/9);
+        circle << new Circle(cellSize);
         circle[i]->setValue(i+1);
         if(i < 5)
         {
@@ -104,9 +105,9 @@ void Widget::showSideV(QPointF p)
     double x, y;
     for(int i = 0; i < 9; i++)
     {
-        circle << new Circle(scene->width()/9);
+        circle << new Circle(cellSize);
         circle[i]->setValue(i+1);
-        if (p.x() == 0)
+        if (static_cast<int>(p.x()) == 0)
         {
             if(i < 5)
             {
@@ -142,10 +143,7 @@ void Widget::showSideV(QPointF p)
 
 bool Widget::variantsAreShown()
 {
-    if(chosenCell)
-        return true;
-    else
-        return false;
+    return chosenCell;
 }
 
 void Widget::removeVariants()
@@ -222,7 +220,7 @@ void Widget::showDifficulties()
         removeVariants();
     buttonStart->setText("CLOSE");
     for(int i = 0; i < 3; i++)
-        difficulties << new Button(scene->width(), scene->height()/9);
+        difficulties << new Button(static_cast<int>(scene->width()), static_cast<int>(scene->height()/9));
     difficulties[0]->setText("EASY");
     difficulties[1]->setText("MEDIUM");
     difficulties[2]->setText("HARD");
@@ -253,7 +251,7 @@ void Widget::startGame(int difficulty)
     removeDifficulties();
     scene->removeItem(timer);
     delete timer;
-    timer = new Timer(scene->width()/9);
+    timer = new Timer(static_cast<int>(scene->width()/9));
     timer->setPos(0, 0);
     scene->addItem(timer);
     generator->recieveDifficulty(difficulty);
@@ -277,7 +275,7 @@ void Widget::recievePuzzle(int** numbrs)
 
 void Widget::setRedCell()
 {
-    cell[mistakeCell.y()*9+mistakeCell.x()]->setRed();
+    cell[static_cast<int>(mistakeCell.y()*9+mistakeCell.x())]->setRed();
 }
 
 void Widget::moveCircles()

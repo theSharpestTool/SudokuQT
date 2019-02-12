@@ -12,7 +12,7 @@ void Circle::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QW
     painter->setBrush(QBrush(Qt::darkRed));
     painter->setRenderHint(QPainter::Antialiasing, true);
     painter->drawEllipse(boundingRect());
-    painter->setFont(QFont("Times", size/2.5, QFont::Normal));
+    painter->setFont(QFont("Times", static_cast<int>(size/2.5), QFont::Normal));
     painter->drawText(boundingRect(), Qt::AlignCenter, QString::number(value));
     setOpacity(0.85);
 
